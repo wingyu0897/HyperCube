@@ -41,6 +41,7 @@ public class GameOverUIShowing : MonoBehaviour
 			if (time >= curveTime * 0.5f)
 			{
 				overUI.SetActive(true);
+				break;
 			}
 
 			yield return new WaitForSeconds(Time.deltaTime);
