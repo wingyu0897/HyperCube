@@ -8,6 +8,7 @@ public class LevelPrefab
 {
 	public Level prefab;
 	public int appearPoint = 0;
+	public int disAppearPoint = -1;
 }
 
 [RequireComponent(typeof(LevelPoolManager))]
@@ -65,6 +66,7 @@ public class LevelManager : MonoBehaviour
 		if (isRunning)
 		{
 			CheckAppearPoint();
+			CheckDisAppearPoint();
 			SpawnLevels();
 			PushLevels();
 		}
@@ -122,7 +124,7 @@ public class LevelManager : MonoBehaviour
 		if (spawnedLevels.Count > 0)
 		{
 			Level firLevel = spawnedLevels[0];
-			if (bottomPos.y - firLevel.transform.position.y >= firLevel.lenght)
+			if (bottomPos.y - firLevel.transform.position.y - 1 >= firLevel.lenght)
 			{
 				Push(firLevel);
 			}
@@ -144,6 +146,27 @@ public class LevelManager : MonoBehaviour
 					weight += unUsableLevels[0].prefab.weight; //가중치 값 합산
 					unUsableLevels[0].prefab.maxWeight = weight; //최대 가중치 값 지정
 					unUsableLevels.RemoveAt(0);
+				}
+			}
+		}
+	}
+
+	private void CheckDisAppearPoint()
+	{
+		if (usableLevels.Count > 0)
+		{
+			int count = usableLevels.Count;
+			int index = 0;
+			for (int i = 0; i < count; i++)
+			{
+				if (usableLevels[index].disAppearPoint > 0 && usableLevels[index].disAppearPoint <= GameManager.instance.score)
+				{
+					weight -= usableLevels[index].prefab.weight;
+					usableLevels.RemoveAt(index);
+				}
+				else
+				{
+					index++;
 				}
 			}
 		}
@@ -172,7 +195,7 @@ public class LevelManager : MonoBehaviour
 			Push(spawnedLevels[0]);
 		}
 
-		levelPrefabs = levelPrefabs.OrderByDescending(i => i.prefab.weight).ToList(); //levelPrefbs.prefab.weight 값을 기준으로 내림차순 정렬
+		levelPrefabs = levelPrefabs.OrderBy(i => i.appearPoint).ToList(); //levelPrefbs.appearPoint 값을 기준으로 내림차순 정렬
 		usableLevels.Clear(); //사용가능한 레벨들 초기화
 		unUsableLevels = levelPrefabs.ToList(); //사용 불가능한 레벨들 초기화(스폰할 레벨들에서 값 복사)
 

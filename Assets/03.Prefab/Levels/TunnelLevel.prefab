@@ -405,8 +405,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  maxWeight: 120
-  weight: 40
+  maxWeight: 10140
+  weight: 20
   canMove: 1
   lenght: 8
   tunnels:

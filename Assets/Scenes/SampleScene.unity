@@ -558,7 +558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sidewardMaxSpeed: 7
-  acceleration: 6
+  acceleration: 9
   sidewardSlider: {fileID: 1866311091}
   deathParticle: {fileID: 1577708981}
   move: 0
@@ -7186,13 +7186,14 @@ MonoBehaviour:
   levelPrefabs:
   - prefab: {fileID: 7748744072146564918, guid: 55968332610e3a74a9776c8aa184dec6, type: 3}
     appearPoint: 0
+    disAppearPoint: -1
+  - prefab: {fileID: 7979869594562532301, guid: 4ea5caa13e7d552458f6f3c3cc794dd7, type: 3}
+    appearPoint: 50
+    disAppearPoint: 53
   - prefab: {fileID: 7776850209470405518, guid: 1afdcbf6d7337e2409b82614c2a91519, type: 3}
     appearPoint: 10
-  unUsableLevels:
-  - prefab: {fileID: 7748744072146564918, guid: 55968332610e3a74a9776c8aa184dec6, type: 3}
-    appearPoint: 0
-  - prefab: {fileID: 7776850209470405518, guid: 1afdcbf6d7337e2409b82614c2a91519, type: 3}
-    appearPoint: 10
+    disAppearPoint: -1
+  unUsableLevels: []
   usableLevels: []
   spawnedLevels: []
   lateInput: {fileID: 0}
@@ -7340,7 +7341,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
