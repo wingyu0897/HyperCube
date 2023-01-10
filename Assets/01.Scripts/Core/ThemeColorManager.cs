@@ -4,13 +4,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ThemeColorManager : MonoBehaviour
+public class ThemeColorManager : MonoBehaviour, ISystem
 {
-	[Tooltip("좌측이 배경색, 우측이 UI색이 된다.")]
-    public List<Gradient> colorThemes;
-
+	[Space]
 	[SerializeField]
 	private Camera cam;
+	[Tooltip("맨좌측이 배경색, 맨우측이 UI색이 된다.")][Space]
+    public List<Gradient> colorThemes;
+
 	[SerializeField]
 	private List<Image> color1Images;
 	[SerializeField]
@@ -18,7 +19,7 @@ public class ThemeColorManager : MonoBehaviour
 	[SerializeField]
 	private List<TextMeshProUGUI> texts;
 
-    public void SetColor()
+    public void SetRandomColorTheme()
 	{
 		Gradient color = colorThemes[Random.Range(0, colorThemes.Count)];
 
@@ -34,6 +35,17 @@ public class ThemeColorManager : MonoBehaviour
 		foreach (TextMeshProUGUI txt in texts)
 		{
 			txt.color = color.Evaluate(1f);
+		}
+	}
+
+	public void UpdateState(GameState state)
+	{
+		switch (state)
+		{
+			case GameState.Init:
+			case GameState.Standby:
+				SetRandomColorTheme();
+				break;
 		}
 	}
 }

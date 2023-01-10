@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Score : MonoBehaviour
+public class ScoreManager : MonoBehaviour
 {
 	[SerializeField]
 	private TextMeshProUGUI scoreText;
@@ -22,7 +22,7 @@ public class Score : MonoBehaviour
 			score = (int)Mathf.Floor(time * increase);
 			scoreText.text = score.ToString();
 
-			GameManager.instance.score = score;
+			GameManager.Instance.score = score;
 		}
 	}
 

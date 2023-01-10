@@ -39,8 +39,6 @@ public class LevelManager : MonoBehaviour
 
 	[Header("<Setting>")]
 	[SerializeField]
-	private float fallingSpeed = 2f;
-	[SerializeField]
 	private Vector3 spawnOffset;
 	private Vector3 spawnPosition;
 	private Vector2 bottomPos;
@@ -144,7 +142,7 @@ public class LevelManager : MonoBehaviour
 			int count = unUsableLevels.Count;
 			for (int i = 0; i < count; i++)
 			{
-				if (unUsableLevels[0].appearPoint <= GameManager.instance.score)
+				if (unUsableLevels[0].appearPoint <= GameManager.Instance.score)
 				{
 					usableLevels.Add(unUsableLevels[0]);
 					weight += unUsableLevels[0].prefab.weight; //가중치 값 합산
@@ -163,7 +161,7 @@ public class LevelManager : MonoBehaviour
 			int index = 0;
 			for (int i = 0; i < count; i++)
 			{
-				if (usableLevels[index].disAppearPoint > 0 && usableLevels[index].disAppearPoint <= GameManager.instance.score)
+				if (usableLevels[index].disAppearPoint > 0 && usableLevels[index].disAppearPoint <= GameManager.Instance.score)
 				{
 					weight -= usableLevels[index].prefab.weight;
 					usableLevels.RemoveAt(index);

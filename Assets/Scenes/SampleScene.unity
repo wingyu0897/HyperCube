@@ -133,8 +133,11 @@ GameObject:
   m_Component:
   - component: {fileID: 27926090}
   - component: {fileID: 27926089}
-  - component: {fileID: 27926091}
   - component: {fileID: 27926092}
+  - component: {fileID: 27926093}
+  - component: {fileID: 27926094}
+  - component: {fileID: 27926091}
+  - component: {fileID: 27926095}
   m_Layer: 0
   m_Name: Core
   m_TagString: Untagged
@@ -154,55 +157,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a7d287e8ec56a845932c8270bbe0605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 49830734}
-  lvManager: {fileID: 1908673491}
-  scoreManager: {fileID: 27926091}
   score: 0
   OnStart:
     m_PersistentCalls:
       m_Calls: []
   OnStop:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1366785103}
-        m_TargetAssemblyTypeName: GameOverUIShowing, Assembly-CSharp
-        m_MethodName: StartShowUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnInitialize:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 27926092}
-        m_TargetAssemblyTypeName: ThemeColorManager, Assembly-CSharp
-        m_MethodName: SetColor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2039075631}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!4 &27926090
 Transform:
   m_ObjectHideFlags: 0
@@ -215,6 +179,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1908673490}
+  - {fileID: 368599792}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -227,14 +192,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 27926088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a050840bbf15de40ab7c2d48d5f20cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 35915aa3866671f4bb24f11a7c8418a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 1722721676}
-  isOn: 0
-  time: 0
-  score: 0
-  increase: 1
+  score: {fileID: 368599793}
 --- !u!114 &27926092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,6 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c0a9cba09acdd42aca547edf46807f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 519420031}
   colorThemes:
   - serializedVersion: 2
     key0: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
@@ -417,7 +379,7 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   - serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
+    key0: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
     key1: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
@@ -500,7 +462,6 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  cam: {fileID: 519420031}
   color1Images:
   - {fileID: 1715670049}
   color2Images:
@@ -510,6 +471,46 @@ MonoBehaviour:
   texts:
   - {fileID: 1722721676}
   - {fileID: 1119118701}
+--- !u!114 &27926093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27926088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7d2f81eb4b31949b57cafb210c02a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiComponents:
+  - {fileID: 1521735850}
+  - {fileID: 1366785104}
+--- !u!114 &27926094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27926088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29f25f3f89760b44dba932d2a315b8d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &27926095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27926088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d53c7d8c8ab6c104ba1b18a0d21c4d61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelManager: {fileID: 1908673491}
 --- !u!1 &49830732
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,7 +559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forwardSpeed: 4
-  sidewardMaxSpeed: 5
+  sidewardMaxSpeed: 4
   acceleration: 12
   sidewardSlider: {fileID: 1866311091}
   deathParticle: {fileID: 1577708981}
@@ -981,6 +982,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 333319756}
   m_CullTransparentMesh: 1
+--- !u!1 &368599791
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 368599792}
+  - component: {fileID: 368599793}
+  m_Layer: 0
+  m_Name: Score
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &368599792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368599791}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 27926090}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &368599793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368599791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40c1211ff86ec604bb5403b5a0ffa9b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 1722721676}
+  isOn: 0
+  time: 0
+  score: 0
+  increase: 1
 --- !u!1 &446408420
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,7 +1175,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1852,6 +1901,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1366785102}
   - component: {fileID: 1366785103}
+  - component: {fileID: 1366785104}
   m_Layer: 5
   m_Name: GameOver
   m_TagString: Untagged
@@ -1928,6 +1978,19 @@ MonoBehaviour:
     m_RotationOrder: 4
   fadeScreen: {fileID: 1715670049}
   overUI: {fileID: 642110227}
+--- !u!114 &1366785104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366785101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6acf5db45c2e664c8504100afbbf91b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 3
 --- !u!1 &1521735848
 GameObject:
   m_ObjectHideFlags: 0
@@ -1937,6 +2000,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1521735849}
+  - component: {fileID: 1521735850}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -1964,6 +2028,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1521735850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521735848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a1d171fa4bdb1c4c971277b8a3a0e40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 1
+  runningTap: {fileID: 2039075633}
 --- !u!1 &1577708978
 GameObject:
   m_ObjectHideFlags: 0
@@ -7201,7 +7279,6 @@ MonoBehaviour:
   isRunning: 0
   isStopped: 1
   weight: 0
-  fallingSpeed: 4
   spawnOffset: {x: 0, y: 6, z: 0}
 --- !u!114 &1908673492
 MonoBehaviour:
@@ -7298,18 +7375,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 27926089}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: StartGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2039075631}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
