@@ -7,11 +7,11 @@ using UnityEngine.UI;
 public class Movement : MonoBehaviour
 {
 	[Header("Movement")]
-	[SerializeField][Tooltip("ÀüÁø ¼Óµµ")]
+	[SerializeField][Tooltip("ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½")]
 	private float forwardSpeed;
-    [SerializeField][Tooltip("ÁÂ¿ì ÀÌµ¿ ÃÖ´ë¼Óµµ")]
+    [SerializeField][Tooltip("ï¿½Â¿ï¿½ ï¿½Ìµï¿½ ï¿½Ö´ï¿½Óµï¿½")]
     private float sidewardMaxSpeed;
-	[SerializeField][Tooltip("°¡¼Óµµ")]
+	[SerializeField][Tooltip("ï¿½ï¿½ï¿½Óµï¿½")]
 	private float acceleration = 1f;
 
 	[Header("Reference")]
@@ -102,6 +102,7 @@ public class Movement : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		GameManager.Instance?.UpdateState(GameState.Result);
+		if (collision.CompareTag("Wall"))
+			GameManager.Instance?.UpdateState(GameState.Result);
 	}
 }

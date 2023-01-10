@@ -6,7 +6,7 @@ public class PlayerSystem : MonoBehaviour, ISystem
 {
 	private Movement player;
 
-	private void Start()
+	private void Awake()
 	{
 		player = GameObject.Find("Player").GetComponent<Movement>();
 	}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4188903874895147430}
   m_Layer: 0
   m_Name: Box2
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 6818666746627436771}
   m_Layer: 0
   m_Name: Box1
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,11 +262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a7a4e9a5be94249aed8d17a835b69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  canMove: 1
+  maxWeight: 0
   weight: 100
-  minValue: 0
-  maxValue: 0
   lenght: 6
   boxes:
   - {fileID: 7103682357388261326}
