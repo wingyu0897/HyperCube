@@ -102,6 +102,7 @@ public class Movement : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		GameManager.instance?.StopGame();
+		if (collision.CompareTag("Wall"))
+			GameManager.instance?.StopGame();
 	}
 }

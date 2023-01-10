@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8131968881307895}
   m_Layer: 0
   m_Name: LeftSide
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 7598803618660432242}
   m_Layer: 0
   m_Name: RightSide
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 8234122584446772674}
   m_Layer: 0
   m_Name: RightSide
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -404,10 +404,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ff9524e83c74e5488c1916aa063cfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
   maxWeight: 10140
   weight: 20
-  canMove: 1
   lenght: 8
   tunnels:
   - {fileID: 614884406157798288}
@@ -427,7 +425,7 @@ GameObject:
   - component: {fileID: 7960047620165003491}
   m_Layer: 0
   m_Name: LeftSide
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -536,7 +534,7 @@ GameObject:
   - component: {fileID: 6520923987118706474}
   m_Layer: 0
   m_Name: RightSide
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -741,7 +739,7 @@ GameObject:
   - component: {fileID: 97614318786768520}
   m_Layer: 0
   m_Name: LeftSide
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
