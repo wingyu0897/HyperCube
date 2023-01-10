@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
-	[Header("Setting")]
+	[Header("Movement")]
+	[SerializeField][Tooltip("전진 속도")]
+	private float forwardSpeed;
     [SerializeField][Tooltip("좌우 이동 최대속도")]
     private float sidewardMaxSpeed;
 	[SerializeField][Tooltip("가속도")]
@@ -60,13 +62,13 @@ public class Movement : MonoBehaviour
 		{
 			addVelocity = 0;
 		}
-		curVelocity = new Vector3(curVelocity.x += addVelocity * Time.deltaTime * acceleration, curVelocity.y, 0);
-		curVelocity = new Vector3(Mathf.Clamp(curVelocity.x, -sidewardMaxSpeed, sidewardMaxSpeed), curVelocity.y);
+		curVelocity = new Vector3(curVelocity.x += addVelocity * Time.deltaTime * acceleration, forwardSpeed, 0);
+		curVelocity = new Vector3(Mathf.Clamp(curVelocity.x, -sidewardMaxSpeed, sidewardMaxSpeed), forwardSpeed);
 	}
 
 	private void Move()
 	{
-		transform.position += curVelocity * Time.deltaTime;
+		transform.Translate(curVelocity * Time.deltaTime);
 	}
 
 	public void Die()

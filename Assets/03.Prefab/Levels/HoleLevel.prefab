@@ -3749,11 +3749,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a7a4e9a5be94249aed8d17a835b69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
   maxWeight: 10000
   weight: 10000
-  canMove: 1
-  lenght: 18
+  lenght: 20
   boxes: []
   posXRandomness: 0
 --- !u!1 &8298696022566085161

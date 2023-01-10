@@ -538,7 +538,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 49830732}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.5, z: 0}
+  m_LocalPosition: {x: 0, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1577708979}
@@ -557,8 +557,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 840171e1bd59d984cb58ca28ed0e50cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sidewardMaxSpeed: 7
-  acceleration: 9
+  forwardSpeed: 4
+  sidewardMaxSpeed: 5
+  acceleration: 12
   sidewardSlider: {fileID: 1866311091}
   deathParticle: {fileID: 1577708981}
   move: 0
@@ -1097,7 +1098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 49830733}
-  offset: {x: 0, y: 2.5, z: 0}
+  offset: {x: 0, y: 1.5, z: 0}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -7201,7 +7202,7 @@ MonoBehaviour:
   isStopped: 1
   weight: 0
   fallingSpeed: 4
-  spawnPos: {x: 0, y: 8}
+  spawnOffset: {x: 0, y: 6, z: 0}
 --- !u!114 &1908673492
 MonoBehaviour:
   m_ObjectHideFlags: 0

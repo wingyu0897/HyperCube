@@ -41,7 +41,8 @@ public class LevelManager : MonoBehaviour
 	[SerializeField]
 	private float fallingSpeed = 2f;
 	[SerializeField]
-	private Vector2 spawnPos;
+	private Vector3 spawnOffset;
+	private Vector3 spawnPosition;
 	private Vector2 bottomPos;
 
 	private Camera cam;
@@ -59,6 +60,8 @@ public class LevelManager : MonoBehaviour
 		{
 			poolManager.CreatePool(pl.prefab, transform, pl.count);
 		}
+
+		spawnPosition = spawnOffset;
 	}
 
 	private void Update()
@@ -69,6 +72,9 @@ public class LevelManager : MonoBehaviour
 			CheckDisAppearPoint();
 			SpawnLevels();
 			PushLevels();
+
+			spawnPosition = cam.transform.position + spawnOffset;
+			spawnPosition.z = 0;
 		}
 	}
 	/// <summary>
@@ -76,27 +82,25 @@ public class LevelManager : MonoBehaviour
 	/// </summary>
 	private void SpawnLevels()
 	{
+		if (usableLevels.Count == 0)
+			return;
+
 		Level obj;
 
-		if (usableLevels.Count > 0)
+		if (lateInput != null)
 		{
-			if (lateInput != null)
+			if (spawnPosition.y - lateInput.transform.position.y >= lateInput.lenght)
 			{
-				if (spawnPos.y - lateInput.transform.position.y >= lateInput.lenght)
-				{
-
-					int weightValue = Random.Range(0, weight + 1);
-					obj = Pop(WeightToPrefab(weightValue));
-					obj.transform.position = spawnPos;
-					obj.speed = fallingSpeed;
-				}
+				Vector3 lastPos = lateInput.transform.position + new Vector3(0, lateInput.lenght);
+				int weightValue = Random.Range(0, weight + 1);
+				obj = Pop(WeightToPrefab(weightValue));
+				obj.transform.position = lastPos;
 			}
-			else
-			{
-				obj = Pop(usableLevels[0].prefab);
-				obj.transform.position = spawnPos;
-				obj.speed = fallingSpeed;
-			}
+		}
+		else
+		{
+			obj = Pop(usableLevels[0].prefab);
+			obj.transform.position = spawnPosition;
 		}
 	}
 	/// <summary>
@@ -124,7 +128,7 @@ public class LevelManager : MonoBehaviour
 		if (spawnedLevels.Count > 0)
 		{
 			Level firLevel = spawnedLevels[0];
-			if (bottomPos.y - firLevel.transform.position.y - 1 >= firLevel.lenght)
+			if ((cam.transform.position.y + bottomPos.y) - firLevel.transform.position.y - 1 >= firLevel.lenght)
 			{
 				Push(firLevel);
 			}
@@ -187,11 +191,11 @@ public class LevelManager : MonoBehaviour
 
 		isRunning = false;
 		isStopped = true;
+		spawnPosition = spawnOffset;
 
 		int count = spawnedLevels.Count;
 		for (int i = 0; i < count; i++)
 		{
-			spawnedLevels[0].canMove = true; //스폰된 레벨들 회수
 			Push(spawnedLevels[0]);
 		}
 
@@ -210,36 +214,35 @@ public class LevelManager : MonoBehaviour
 		if (!isStopped)
 		{
 			StopAllCoroutines();
-			StartCoroutine(SlowMove());
 
 			isStopped = true;
 		}
 	}
 
-	IEnumerator SlowMove()
-	{
-		float speed = fallingSpeed;
+	//IEnumerator SlowMove()
+	//{
+	//	float speed = fallingSpeed;
 
-		while (speed > 0.01f)
-		{
-			float preSpeed = speed;
-			speed -= Time.deltaTime * fallingSpeed;
+	//	while (speed > 0.01f)
+	//	{
+	//		float preSpeed = speed;
+	//		speed -= Time.deltaTime * fallingSpeed;
 
-			speed = Mathf.Clamp(speed, 0, preSpeed);
+	//		speed = Mathf.Clamp(speed, 0, preSpeed);
 
-			foreach (Level lv in spawnedLevels)
-			{
-				lv.speed = speed;
-			}
+	//		foreach (Level lv in spawnedLevels)
+	//		{
+	//			lv.speed = speed;
+	//		}
 
-			yield return new WaitForSeconds(Time.deltaTime);
-		}
+	//		yield return new WaitForSeconds(Time.deltaTime);
+	//	}
 
-		foreach (Level lv in spawnedLevels)
-		{
-			lv.canMove = false;
-		}
-	}
+	//	foreach (Level lv in spawnedLevels)
+	//	{
+	//		lv.canMove = false;
+	//	}
+	//}
 
 	public Level Pop(Level level)
 	{
@@ -261,7 +264,7 @@ public class LevelManager : MonoBehaviour
 	private void OnDrawGizmosSelected()
 	{
 		Gizmos.color = Color.magenta;
-		Gizmos.DrawWireSphere(spawnPos, 0.5f);
+		Gizmos.DrawWireSphere(spawnPosition, 0.5f);
 		Gizmos.color = Color.white;
 	}
 #endif
