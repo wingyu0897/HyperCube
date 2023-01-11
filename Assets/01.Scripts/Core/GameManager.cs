@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
 
 		if (state == GameState.Init)
 		{
-			UpdateState(GameState.Standby);
+			UpdateState(GameState.Menu);
 		}
 	}
 }

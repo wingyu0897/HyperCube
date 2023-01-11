@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class GameOverUIShowing : MonoBehaviour
 {
@@ -15,12 +16,24 @@ public class GameOverUIShowing : MonoBehaviour
 	[SerializeField]
 	private Image fadeScreen;
 	[SerializeField]
-	private GameObject overUI;
+	private CanvasGroup overUI;
+
+	private bool isOverUIActive = false;
 
 	public void StartShowUI()
 	{
 		StopAllCoroutines();
 		StartCoroutine(ShowUI());
+	}
+
+	public void Init()
+	{
+		StopAllCoroutines();
+		isOverUIActive = false;
+		fadeScreen.gameObject.SetActive(false);
+		overUI.alpha = 0;
+		overUI.interactable = false;
+		overUI.blocksRaycasts = false;
 	}
 
 	IEnumerator ShowUI()
@@ -38,13 +51,26 @@ public class GameOverUIShowing : MonoBehaviour
 
 			time += Time.deltaTime;
 
-			if (time >= curveTime * 0.5f)
+			if (time >= curveTime * 0.5f && !isOverUIActive)
 			{
-				overUI.SetActive(true);
-				break;
+				ActiveOverUI(true);
 			}
 
 			yield return new WaitForSeconds(Time.deltaTime);
 		}
+	}
+
+	private void ActiveOverUI(bool active)
+	{
+		isOverUIActive = active;
+
+		Tween to = DOTween.To(() => overUI.alpha, x => overUI.alpha = x, active ? 1f : 0, 1f);
+
+		Sequence seq = DOTween.Sequence();
+		seq.Append(to);
+		seq.AppendCallback(() => { 
+			overUI.interactable = active;
+			overUI.blocksRaycasts = active;
+			});
 	}
 }

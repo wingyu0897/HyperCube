@@ -14,6 +14,12 @@ public class ResultUI : UIComponent
 	{
 		overUIShow = GetComponent<GameOverUIShowing>();
 		restartButton.onClick.AddListener(() => GameManager.Instance.UpdateState(GameState.Standby));
+		restartButton.onClick.AddListener(() => overUIShow.Init());
+	}
+
+	private void Start()
+	{
+		overUIShow.Init();
 	}
 
 	public override void UpdateUI()

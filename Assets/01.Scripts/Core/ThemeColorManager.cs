@@ -54,6 +54,10 @@ public class ThemeColorManager : MonoBehaviour, ISystem
 		lastColor = color;
 
 		DOTween.To(() => cam.backgroundColor, x => cam.backgroundColor = x, color.Evaluate(0), 1f);
+		foreach (Image img in color2Images)
+		{
+			DOTween.To(() => img.color, x => img.color = x, color.Evaluate(1f), 1f);
+		}
 	}
 
 	public void UpdateState(GameState state)

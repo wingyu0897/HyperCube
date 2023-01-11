@@ -20,7 +20,7 @@ public class PlayerSystem : MonoBehaviour, ISystem
 				player.Initialize();
 				break;
 			case GameState.Running:
-				player.Active();
+				player.Active(true);
 				break;
 		}
 	}

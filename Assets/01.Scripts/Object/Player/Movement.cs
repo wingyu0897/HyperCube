@@ -17,10 +17,14 @@ public class Movement : MonoBehaviour
 	private float deAcceleration = 1f;
 
 	[Header("Reference")]
+	[SerializeField]
+	private GameObject tabToStart;
 	[SerializeField] 
 	private Slider sidewardSlider;
 	[SerializeField]
 	private ParticleSystem deathParticle;
+
+	private TrailRenderer trailRenderer;
 
 	public bool move = false;
     public Vector3 curVelocity;
@@ -28,6 +32,11 @@ public class Movement : MonoBehaviour
 
 	[Header("Event")]
 	public UnityEvent OnDie;
+
+	private void Awake()
+	{
+		trailRenderer = GetComponent<TrailRenderer>();
+	}
 
 	private void Update()
 	{
@@ -90,8 +99,10 @@ public class Movement : MonoBehaviour
 		if (!isDie)
 		{
 			StartCoroutine(SlowlyStop());
+			CinemachineShake.Instance.ShakeCamera(2f, 0.2f);
 
 			move = false;
+			trailRenderer.enabled = false;
 			isDie = true;
 			curVelocity = Vector3.zero;
 			GetComponent<SpriteRenderer>().enabled = false;
@@ -100,16 +111,19 @@ public class Movement : MonoBehaviour
 		}
 	}
 
-	public void Active()
+	public void Active(bool active)
 	{
-		move = true;
+		tabToStart.SetActive(!active);
+		move = active;
+		trailRenderer.Clear();
+		trailRenderer.enabled = active;
 	}
 
 	public void Initialize()
 	{
 		StopAllCoroutines();
+		Active(false);
 		isDie = false;
-		move = false;
 		curVelocity = Vector3.zero;
 		sidewardSlider.value = 0;
 		transform.position = new Vector3(0, -2.5f);
