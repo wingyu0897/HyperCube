@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -25,16 +26,16 @@ public class GameManager : MonoBehaviour
 		{
 			Instance = this;
 		}
-	}
 
-	private void Start()
-	{
 		systems.Add(GetComponent<UISystem>());
 		systems.Add(GetComponent<ThemeColorManager>());
 		systems.Add(GetComponent<PlayerSystem>());
 		systems.Add(GetComponent<ScoreSystem>());
 		systems.Add(GetComponent<LevelSystem>());
+	}
 
+	private void Start()
+	{
 		UpdateState(GameState.Init);
 	}
 
@@ -49,5 +50,17 @@ public class GameManager : MonoBehaviour
 		{
 			UpdateState(GameState.Menu);
 		}
+	}
+
+	public T GetSystem<T>() where T : class, ISystem
+	{
+		var value = default(T);
+
+		foreach (var sys in systems.OfType<T>())
+		{
+			value = sys;
+		}
+
+		return value;
 	}
 }

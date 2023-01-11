@@ -9,10 +9,13 @@ public class Movement : MonoBehaviour
 	[Header("Movement")]
 	[SerializeField]
 	private float forwardSpeed;
+	public float ForwardSpeed { get => forwardSpeed; set => forwardSpeed = value; }
     [SerializeField]
     private float sidewardMaxSpeed;
+	public float SidewardMaxSpeed { get => sidewardMaxSpeed; set => sidewardMaxSpeed = value; }
 	[SerializeField]
 	private float acceleration = 1f;
+	public float Acceleration { get => acceleration; set => acceleration = value; }
 	[SerializeField]
 	private float deAcceleration = 1f;
 

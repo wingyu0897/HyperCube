@@ -7,6 +7,8 @@ public class ResultUI : UIComponent
 {
 	[SerializeField]
 	private Button restartButton;
+	[SerializeField]
+	private Button returnMenuButton;
 
 	private GameOverUIShowing overUIShow;
 
@@ -15,6 +17,8 @@ public class ResultUI : UIComponent
 		overUIShow = GetComponent<GameOverUIShowing>();
 		restartButton.onClick.AddListener(() => GameManager.Instance.UpdateState(GameState.Standby));
 		restartButton.onClick.AddListener(() => overUIShow.Init());
+		returnMenuButton.onClick.AddListener(() => GameManager.Instance.UpdateState(GameState.Menu));
+		returnMenuButton.onClick.AddListener(() => overUIShow.Init());
 	}
 
 	private void Start()

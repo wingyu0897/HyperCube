@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerSystem : MonoBehaviour, ISystem
 {
-	private Movement player;
+	public Movement player;
 
 	private void Awake()
 	{

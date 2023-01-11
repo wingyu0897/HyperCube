@@ -10,7 +10,10 @@ public class ThemeColorManager : MonoBehaviour, ISystem
 	[Space]
 	[SerializeField]
 	private Camera cam;
-	[Tooltip("맨좌측이 배경색, 맨우측이 UI색이 된다.")][Space]
+	[Space]
+	[SerializeField]
+	private Material levelMaterial;
+	[Tooltip("맨좌측이 배경색, 맨우측이 UI색이 된다.")]
     public List<Gradient> colorThemes;
 
 	[SerializeField]
@@ -22,7 +25,12 @@ public class ThemeColorManager : MonoBehaviour, ISystem
 
 	private Gradient lastColor;
 
-    public void SetRandomColorTheme()
+	private void Start()
+	{
+		lastColor = null;
+	}
+
+	public void SetRandomColorTheme()
 	{
 		Gradient color = colorThemes[Random.Range(0, colorThemes.Count)];
 		lastColor = color;
@@ -42,22 +50,24 @@ public class ThemeColorManager : MonoBehaviour, ISystem
 		}
 	}
 
-	public void ChangeBackgroundColorSmooth()
+	public void ChangeLevelColorSmooth()
 	{
 		Gradient color;
 
-		do
-		{
-			color = colorThemes[Random.Range(0, colorThemes.Count)];
-		} while (lastColor.Equals(color));
+		//do
+		//{
+		color = colorThemes[Random.Range(0, colorThemes.Count)];
+		//} while (lastColor.Equals(color));
+
+		Color levelColor = Random.ColorHSV(0f, 1f, 1f, 1f, 0.8f, 1f, 1f, 1f);
 
 		lastColor = color;
 
-		DOTween.To(() => cam.backgroundColor, x => cam.backgroundColor = x, color.Evaluate(0), 1f);
-		foreach (Image img in color2Images)
-		{
-			DOTween.To(() => img.color, x => img.color = x, color.Evaluate(1f), 1f);
-		}
+		DOTween.To(() => levelMaterial.GetColor("_Color"), x => levelMaterial.SetColor("_Color", x), levelColor, 1f);
+		//foreach (Image img in color2Images)
+		//{
+		//	DOTween.To(() => img.color, x => img.color = x, color.Evaluate(1f), 1f);
+		//}
 	}
 
 	public void UpdateState(GameState state)
@@ -66,7 +76,7 @@ public class ThemeColorManager : MonoBehaviour, ISystem
 		{
 			case GameState.Init:
 			case GameState.Standby:
-				SetRandomColorTheme();
+				levelMaterial.SetColor("_Color", Color.white);
 				break;
 		}
 	}
