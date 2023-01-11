@@ -22,9 +22,6 @@ public class PlayerSystem : MonoBehaviour, ISystem
 			case GameState.Running:
 				player.Active();
 				break;
-			case GameState.Result:
-				player.Die();
-				break;
 		}
 	}
 }

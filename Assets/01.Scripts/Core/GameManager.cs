@@ -35,7 +35,6 @@ public class GameManager : MonoBehaviour
 		systems.Add(GetComponent<ScoreSystem>());
 		systems.Add(GetComponent<LevelSystem>());
 
-		InitializeGame();
 		UpdateState(GameState.Init);
 	}
 
@@ -50,11 +49,5 @@ public class GameManager : MonoBehaviour
 		{
 			UpdateState(GameState.Standby);
 		}
-	}
-
-	public void InitializeGame()
-	{
-		UpdateState(GameState.Standby);
-		OnInitialize?.Invoke();
 	}
 }

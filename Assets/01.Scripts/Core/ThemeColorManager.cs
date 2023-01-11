@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class ThemeColorManager : MonoBehaviour, ISystem
 {
@@ -19,9 +20,12 @@ public class ThemeColorManager : MonoBehaviour, ISystem
 	[SerializeField]
 	private List<TextMeshProUGUI> texts;
 
+	private Gradient lastColor;
+
     public void SetRandomColorTheme()
 	{
 		Gradient color = colorThemes[Random.Range(0, colorThemes.Count)];
+		lastColor = color;
 
 		cam.backgroundColor = color.Evaluate(0);
 		foreach (Image img in color1Images)
@@ -36,6 +40,20 @@ public class ThemeColorManager : MonoBehaviour, ISystem
 		{
 			txt.color = color.Evaluate(1f);
 		}
+	}
+
+	public void ChangeBackgroundColorSmooth()
+	{
+		Gradient color;
+
+		do
+		{
+			color = colorThemes[Random.Range(0, colorThemes.Count)];
+		} while (lastColor.Equals(color));
+
+		lastColor = color;
+
+		DOTween.To(() => cam.backgroundColor, x => cam.backgroundColor = x, color.Evaluate(0), 1f);
 	}
 
 	public void UpdateState(GameState state)

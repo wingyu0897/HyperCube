@@ -7,12 +7,14 @@ using UnityEngine.UI;
 public class Movement : MonoBehaviour
 {
 	[Header("Movement")]
-	[SerializeField][Tooltip("���� �ӵ�")]
+	[SerializeField]
 	private float forwardSpeed;
-    [SerializeField][Tooltip("�¿� �̵� �ִ�ӵ�")]
+    [SerializeField]
     private float sidewardMaxSpeed;
-	[SerializeField][Tooltip("���ӵ�")]
+	[SerializeField]
 	private float acceleration = 1f;
+	[SerializeField]
+	private float deAcceleration = 1f;
 
 	[Header("Reference")]
 	[SerializeField] 
@@ -71,12 +73,26 @@ public class Movement : MonoBehaviour
 		transform.Translate(curVelocity * Time.deltaTime);
 	}
 
+	IEnumerator SlowlyStop()
+	{
+		float forwardSpeed = this.forwardSpeed;
+
+		while (forwardSpeed > 0)
+		{
+			transform.Translate(new Vector3(0, forwardSpeed) * Time.deltaTime);
+			forwardSpeed -= Time.deltaTime * deAcceleration;
+			yield return new WaitForSeconds(Time.deltaTime);
+		}
+	}
+
 	public void Die()
 	{
 		if (!isDie)
 		{
-			isDie = true;
+			StartCoroutine(SlowlyStop());
+
 			move = false;
+			isDie = true;
 			curVelocity = Vector3.zero;
 			GetComponent<SpriteRenderer>().enabled = false;
 			deathParticle.Play();
@@ -91,6 +107,7 @@ public class Movement : MonoBehaviour
 
 	public void Initialize()
 	{
+		StopAllCoroutines();
 		isDie = false;
 		move = false;
 		curVelocity = Vector3.zero;
@@ -103,6 +120,9 @@ public class Movement : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.CompareTag("Wall"))
+		{
+			Die();
 			GameManager.Instance?.UpdateState(GameState.Result);
+		}
 	}
 }
