@@ -11,8 +11,12 @@ public class DifficultyModeManager : MonoBehaviour
     private Button easyButton;
     private RectTransform easyButtonRTrm;
     [SerializeField]
+    private Image easyButtonImg;
+    [SerializeField]
     private Button hardButton;
     private RectTransform hardButtonRTrm;
+    [SerializeField]
+    private Image hardButtonImg;
 
     [SerializeField]
     private Sprite easyUntoggleImage;
@@ -44,8 +48,8 @@ public class DifficultyModeManager : MonoBehaviour
 	{
         easyButton.onClick.AddListener(() => ChangeMode(true));
         hardButton.onClick.AddListener(() => ChangeMode(false));
-        easyButtonRTrm = easyButton.GetComponent<RectTransform>();
-        hardButtonRTrm = hardButton.GetComponent<RectTransform>();
+        easyButtonRTrm = easyButtonImg.GetComponent<RectTransform>();
+        hardButtonRTrm = hardButtonImg.GetComponent<RectTransform>();
         ChangeMode(true);
 	}
 
@@ -60,8 +64,8 @@ public class DifficultyModeManager : MonoBehaviour
 
     private void SetButtonTransform(bool diff)
 	{
-        easyButton.image.sprite = diff ? easyToggleImage : easyUntoggleImage;
-        hardButton.image.sprite = diff ? hardUntoggleImage : hardToggleImage;
+        easyButtonImg.sprite = diff ? easyToggleImage : easyUntoggleImage;
+        hardButtonImg.sprite = diff ? hardUntoggleImage : hardToggleImage;
         easyButtonRTrm.sizeDelta = diff ? new Vector2(200, 200) : new Vector2(180, 180);
         hardButtonRTrm.sizeDelta = diff ? new Vector2(180, 180) : new Vector2(200, 200);
     }

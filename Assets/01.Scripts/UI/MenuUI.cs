@@ -8,6 +8,11 @@ public class MenuUI : UIComponent
 	[SerializeField]
 	private Button startButton;
 
+	[SerializeField]
+	private Button bgmToggleButton;
+	[SerializeField]
+	private Button effectToggleButton;
+
 	private void Awake()
 	{
 		startButton.onClick.AddListener(() => GameManager.Instance.UpdateState(GameState.Standby));

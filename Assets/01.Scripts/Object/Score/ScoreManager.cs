@@ -14,6 +14,8 @@ public class ScoreManager : MonoBehaviour
 	private TextMeshProUGUI bestScoreText;
 	[SerializeField]
 	private GameObject newBestScoreText;
+	[SerializeField]
+	private GameObject crownImage;
 
 	public bool isOn = false;
 	public float time = 0f;
@@ -57,7 +59,8 @@ public class ScoreManager : MonoBehaviour
 
 	public void Initialize()
 	{
-		newBestScoreText.SetActive(false);
+		newBestScoreText?.SetActive(false);
+		crownImage?.SetActive(false);
 		isOn = false;
 		score = 0;
 		scoreText.color = textOriginColor;
@@ -78,7 +81,8 @@ public class ScoreManager : MonoBehaviour
 
 		if (score > bestScore)
 		{
-			newBestScoreText.SetActive(true);
+			newBestScoreText?.SetActive(true);
+			crownImage?.SetActive(true);
 			bestScore = score;
 			PlayerPrefs.SetInt("BestScore", bestScore);
 			bestScoreText.text = bestScore.ToString();

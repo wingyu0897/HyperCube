@@ -9,6 +9,8 @@ public class DarkModeManager : MonoBehaviour
     private GameObject darkModeScreen;
     [SerializeField]
     private Button modeChangeButton;
+	[SerializeField]
+	private Image modeChangeButtonImg;
 
 	[SerializeField]
 	private Sprite normalImage;
@@ -37,6 +39,6 @@ public class DarkModeManager : MonoBehaviour
 	{
 		isDarkMode = mode;
 		darkModeScreen.SetActive(isDarkMode);
-		modeChangeButton.image.sprite = mode ? darkImage : normalImage;
+		modeChangeButtonImg.sprite = mode ? darkImage : normalImage;
 	}
 }

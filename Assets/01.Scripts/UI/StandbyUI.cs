@@ -10,7 +10,11 @@ public class StandbyUI : UIComponent
 
 	private void Start()
 	{
-		runningTap.onClick.AddListener(() => GameManager.Instance.UpdateState(GameState.Running));
+		runningTap.onClick.AddListener(() => 
+		{
+			GameManager.Instance.UpdateState(GameState.Running);
+			runningTap.gameObject.SetActive(false);
+		});
 	}
 
 	public override void UpdateUI()
