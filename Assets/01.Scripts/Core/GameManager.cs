@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
+using DG.Tweening;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
 	private List<ISystem> systems = new List<ISystem>();
+	[SerializeField]
+	private Image blackScreen;
 
 	public int score;
-
-	public UnityEvent OnStart;
-	public UnityEvent OnStop;
-	public UnityEvent OnInitialize;
 
 	private void Awake()
 	{
@@ -50,6 +51,19 @@ public class GameManager : MonoBehaviour
 		{
 			UpdateState(GameState.Menu);
 		}
+	}
+
+	public void UpdateStateFade(GameState state, TweenCallback callBack)
+	{
+		Sequence seq = DOTween.Sequence();
+
+		Tween fade = blackScreen.DOFade(1f, 1f);
+		Tween unFade = blackScreen.DOFade(0f, 1f);
+
+		seq.Append(fade);
+		seq.AppendCallback(() => UpdateState(state));
+		seq.AppendCallback(callBack);
+		seq.Append(unFade);
 	}
 
 	public T GetSystem<T>() where T : class, ISystem

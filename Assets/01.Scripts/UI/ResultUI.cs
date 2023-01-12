@@ -15,10 +15,16 @@ public class ResultUI : UIComponent
 	private void Awake()
 	{
 		overUIShow = GetComponent<GameOverUIShowing>();
-		restartButton.onClick.AddListener(() => GameManager.Instance.UpdateState(GameState.Standby));
-		restartButton.onClick.AddListener(() => overUIShow.Init());
-		returnMenuButton.onClick.AddListener(() => GameManager.Instance.UpdateState(GameState.Menu));
-		returnMenuButton.onClick.AddListener(() => overUIShow.Init());
+		restartButton.onClick.AddListener(() => 
+		{
+			GameManager.Instance.UpdateStateFade(GameState.Standby, () => overUIShow.Init());
+			overUIShow.InteractableFalse();
+		});
+		returnMenuButton.onClick.AddListener(() => 
+		{
+			GameManager.Instance.UpdateStateFade(GameState.Menu, () => overUIShow.Init());
+			overUIShow.InteractableFalse();
+		});
 	}
 
 	private void Start()

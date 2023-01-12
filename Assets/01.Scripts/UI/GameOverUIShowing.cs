@@ -36,6 +36,11 @@ public class GameOverUIShowing : MonoBehaviour
 		overUI.blocksRaycasts = false;
 	}
 
+	public void InteractableFalse()
+	{
+		overUI.interactable = false;
+	}
+
 	IEnumerator ShowUI()
 	{
 		yield return new WaitForSeconds(showDelay);

@@ -15,8 +15,11 @@ public class MenuUI : UIComponent
 
 	private void Awake()
 	{
-		startButton.onClick.AddListener(() => GameManager.Instance.UpdateState(GameState.Standby));
-		startButton.onClick.AddListener(() => SetActiveMenuUI(false));
+		startButton.onClick.AddListener(() => 
+		{
+			GameManager.Instance.UpdateStateFade(GameState.Standby, () => SetActiveMenuUI(false));
+			menuGroup.interactable = false;
+		});
 	}
 
 	private void SetActiveMenuUI(bool value)
