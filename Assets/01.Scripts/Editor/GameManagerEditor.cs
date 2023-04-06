@@ -12,15 +12,15 @@ public class GameManagerEditor : Editor
 		
 		if (GUILayout.Button("StartGame"))
 		{
-			(target as GameManager).StartGame();
+			(target as GameManager).UpdateState(GameState.Running);
 		}
 		if (GUILayout.Button("StopGame"))
 		{
-			(target as GameManager).StopGame();
+			(target as GameManager).UpdateState(GameState.Result);
 		}
 		if (GUILayout.Button("Initialize"))
 		{
-			(target as GameManager).InitializeGame();
+			(target as GameManager).UpdateState(GameState.Standby);
 		}
 	}
 }

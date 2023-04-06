@@ -10,7 +10,7 @@ public class FitCameraCollider : MonoBehaviour
 
 	private void Awake()
 	{
-		cam = GetComponent<Camera>();
+		cam = Camera.main;
 		edgeCol = GetComponent<EdgeCollider2D>();
 
 		FitCollider();
