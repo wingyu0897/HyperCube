@@ -45,7 +45,7 @@ public class Movement : MonoBehaviour
 	{
 		if (move)
 		{
-			if (Input.GetMouseButtonDown(0))
+			if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
 			{
 				if (sidewardSlider.value != 0)
 				{
