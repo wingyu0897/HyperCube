@@ -7,18 +7,27 @@ using UnityEngine.UI;
 public class Movement : MonoBehaviour
 {
 	[Header("Movement")]
-	[SerializeField][Tooltip("전진 속도")]
+	[SerializeField]
 	private float forwardSpeed;
-    [SerializeField][Tooltip("좌우 이동 최대속도")]
+	public float ForwardSpeed { get => forwardSpeed; set => forwardSpeed = value; }
+    [SerializeField]
     private float sidewardMaxSpeed;
-	[SerializeField][Tooltip("가속도")]
+	public float SidewardMaxSpeed { get => sidewardMaxSpeed; set => sidewardMaxSpeed = value; }
+	[SerializeField]
 	private float acceleration = 1f;
+	public float Acceleration { get => acceleration; set => acceleration = value; }
+	[SerializeField]
+	private float deAcceleration = 1f;
 
 	[Header("Reference")]
+	[SerializeField]
+	private GameObject tabToStart;
 	[SerializeField] 
 	private Slider sidewardSlider;
 	[SerializeField]
 	private ParticleSystem deathParticle;
+
+	private TrailRenderer trailRenderer;
 
 	public bool move = false;
     public Vector3 curVelocity;
@@ -27,11 +36,16 @@ public class Movement : MonoBehaviour
 	[Header("Event")]
 	public UnityEvent OnDie;
 
+	private void Awake()
+	{
+		trailRenderer = GetComponent<TrailRenderer>();
+	}
+
 	private void Update()
 	{
 		if (move)
 		{
-			if (Input.GetMouseButtonDown(0))
+			if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
 			{
 				if (sidewardSlider.value != 0)
 				{
@@ -71,12 +85,28 @@ public class Movement : MonoBehaviour
 		transform.Translate(curVelocity * Time.deltaTime);
 	}
 
+	IEnumerator SlowlyStop()
+	{
+		float forwardSpeed = this.forwardSpeed;
+
+		while (forwardSpeed > 0)
+		{
+			transform.Translate(new Vector3(0, forwardSpeed) * Time.deltaTime);
+			forwardSpeed -= Time.deltaTime * deAcceleration;
+			yield return new WaitForSeconds(Time.deltaTime);
+		}
+	}
+
 	public void Die()
 	{
 		if (!isDie)
 		{
-			isDie = true;
+			StartCoroutine(SlowlyStop());
+			CinemachineShake.Instance.ShakeCamera(2f, 0.2f);
+
 			move = false;
+			trailRenderer.enabled = false;
+			isDie = true;
 			curVelocity = Vector3.zero;
 			GetComponent<SpriteRenderer>().enabled = false;
 			deathParticle.Play();
@@ -84,15 +114,19 @@ public class Movement : MonoBehaviour
 		}
 	}
 
-	public void Active()
+	public void Active(bool active)
 	{
-		move = true;
+		tabToStart.SetActive(!active);
+		move = active;
+		trailRenderer.Clear();
+		trailRenderer.enabled = active;
 	}
 
 	public void Initialize()
 	{
+		StopAllCoroutines();
+		Active(false);
 		isDie = false;
-		move = false;
 		curVelocity = Vector3.zero;
 		sidewardSlider.value = 0;
 		transform.position = new Vector3(0, -2.5f);
@@ -102,6 +136,10 @@ public class Movement : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		GameManager.instance?.StopGame();
+		if (collision.CompareTag("Wall"))
+		{
+			Die();
+			GameManager.Instance?.UpdateState(GameState.Result);
+		}
 	}
 }
